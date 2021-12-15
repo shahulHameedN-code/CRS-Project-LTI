@@ -7,7 +7,14 @@ public class Course {
 	private String grade;
 	private int noOfStudents;
 	
+	public Course(){}
 	
+	public Course(String name, String id, int noOfStudents) {
+		this.name=name;
+		this.id=id;
+		this.noOfStudents=noOfStudents;
+		// TODO Auto-generated constructor stub
+	}
 	public String getName() {
 		return name;
 	}
