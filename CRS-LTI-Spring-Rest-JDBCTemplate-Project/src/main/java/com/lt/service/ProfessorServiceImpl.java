@@ -9,10 +9,11 @@ import org.springframework.stereotype.Service;
 import com.lt.bean.Student;
 import com.lt.exception.AddGradeException;
 import com.lt.repository.ProfessorRepository;
+
 /**
  * @author Shraddha,Shahul,Jeaswanth,Parag,Sayli,Shital
  * 
- * it is the implementation class of professor interface
+ *         it is the implementation class of professor interface
  */
 
 @Service
@@ -21,20 +22,35 @@ public class ProfessorServiceImpl {
 	@Autowired
 	ProfessorRepository professorRepo;
 
+	/**
+	 * it is List<Student> viewEnrolledStudents
+	 * 
+	 * @param courseId
+	 * @return courseId
+	 */
 	public List<Student> viewEnrolledStudents(String courseId) {
 		return professorRepo.viewEnrolledStudents(courseId);
 	}
 
+	/**
+	 * Method to addgrades from Course Catalog
+	 * 
+	 * @param courseId
+	 * @param studentId
+	 * @param grade
+	 * @throws AddGradeException
+	 * @return massage
+	 */
 	public String addgrades(String addGradeJson) throws AddGradeException {
 		JSONObject jso = new JSONObject(addGradeJson);
 		String studentId = jso.getString("studentId");
 		String courseId = jso.getString("courseId");
 		String grade = jso.getString("grade");
-		int row= professorRepo.addgrades(studentId, courseId, grade);
-		
-		if(row==0)
+		int row = professorRepo.addgrades(studentId, courseId, grade);
+
+		if (row == 0)
 			throw new AddGradeException();
-		
+
 		return "Grade was assigned for the student successfully!";
 	}
 

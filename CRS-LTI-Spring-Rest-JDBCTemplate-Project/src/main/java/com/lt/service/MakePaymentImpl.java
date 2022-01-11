@@ -21,6 +21,18 @@ public class MakePaymentImpl implements PaymentIntrfc {
  *  
  *  And we are implement the make payment method
 */
+	
+	/**
+     * This is makePayment method
+     * @param studentId
+     * @param courseId
+     * @param paymentFee
+     * @param cardNumber
+     * @param pin
+     * @param cvvNumber
+     * @exception SQLException
+     * @return getPaymentFee
+     */
 	@Override
 	public String makePayment(String makePaymentJson) {
 

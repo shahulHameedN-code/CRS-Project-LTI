@@ -34,10 +34,16 @@ public class StudentRepository {
 	@Autowired
 	JdbcTemplate jdbcTemplate;
 
-	/*
-	 * Here we can add student by using name and id using these query we can add
-	 * value in databse table
+	/**
+	 * This is registerStudent method
+	 * 
+	 * @param name
+	 * @param id
+	 * @param address
+	 * @param email
+	 * @return student
 	 */
+
 	public String registerStudent(StudentRegistration student) {
 		// TODO Auto-generated method stub
 
@@ -46,12 +52,16 @@ public class StudentRepository {
 		jdbcTemplate.update(SQLConstant.REGISTER_USER, student.getName(), student.getPassword(), student.getId(),
 				false);
 
-		return "Student " + student.getName() + " registered successfully";
+		return "Student " + student.getName() + " registered successfully!! Admin Approval Pending";
 	}
 
-	/*
-	 * Here we can add course by using student id and course id using these query we
-	 * can add value in database table
+	/**
+	 * This is addCourse method add the course into list
+	 * 
+	 * @param studentId
+	 * @param courseId
+	 * @exception SQLException
+	 * @return studentCourseList
 	 */
 	public String addCourse(ArrayList<JSONObject> studentCourseList) {
 
@@ -75,18 +85,27 @@ public class StudentRepository {
 		return "Courses Added Successfully";
 	}
 
-	/*
-	 * Here we can remove course by using student id and course id using these query
-	 * we can removed value from database table
+	/**
+	 * This is removeCourse method remove the course from list
+	 * 
+	 * @param studentId
+	 * @param courseId
+	 * @return row
 	 */
 	public int removeCourse(String studentId, String courseId) {
 
-		int row =jdbcTemplate.update(SQLConstant.DELETE_COURSE, studentId, courseId);
+		int row = jdbcTemplate.update(SQLConstant.DELETE_COURSE, studentId, courseId);
 
 		return row;
 
 	}
 
+	/**
+	 * This is viewGrades method
+	 * 
+	 * @param studentId
+	 * @return courseList
+	 */
 	public List<Course> viewGrades(String studentId) {
 
 		List<Course> courseList = jdbcTemplate.query(SQLConstant.VIEW_GRADES, new Object[] { studentId },
@@ -94,10 +113,18 @@ public class StudentRepository {
 		return courseList;
 	}
 
+	/**
+	 * This is makePayment method
+	 * 
+	 * @param studentId
+	 * @return paymentId
+	 * @param PaymentFee
+	 * @return row
+	 */
 	public int makePayment(Payment payment) {
 
-		String sql = "insert into payment(paymentId, studentId, totalAmount) values(?,?,?)";
-		int row=jdbcTemplate.update(sql, payment.getPaymentId(), payment.getStudentId(), payment.getPaymentFee());
+		int row = jdbcTemplate.update(SQLConstant.MAKE_PAYMENT, payment.getPaymentId(), payment.getStudentId(),
+				payment.getPaymentFee());
 
 		return row;
 	}

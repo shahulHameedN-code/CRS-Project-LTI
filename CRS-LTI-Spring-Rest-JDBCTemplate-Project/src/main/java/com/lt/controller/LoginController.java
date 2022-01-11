@@ -26,6 +26,13 @@ public class LoginController {
 	@Autowired
 	LoginServiceImpl loginServiceImpl;
 
+	/**
+	 * This is List<UserLogin>
+	 * 
+	 * @param userName
+	 * @param password
+	 * @return login
+	 */
 	@RequestMapping(path = "/login", method = RequestMethod.POST)
 	public ResponseEntity<String> userLogin(@RequestBody String loginCredentials) throws InvalidCredentialsException {
 		loginServiceImpl.userLogin(loginCredentials);

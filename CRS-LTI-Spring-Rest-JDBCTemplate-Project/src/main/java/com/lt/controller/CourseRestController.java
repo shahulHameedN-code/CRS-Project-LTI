@@ -19,6 +19,13 @@ public class CourseRestController {
 	@Autowired
 	CourseServiceImpl courseServiceImpl;
 
+	/**
+	 * This is viewCourseList method
+	 * 
+	 * @param List<Course>
+	 * @return Course
+	 * @exception SQLException
+	 */
 	@RequestMapping(path = "/viewCourses", method = RequestMethod.GET, produces = "application/json")
 	public ResponseEntity<List<Course>> viewAvailableCourses() throws CourseNotFoundException {
 

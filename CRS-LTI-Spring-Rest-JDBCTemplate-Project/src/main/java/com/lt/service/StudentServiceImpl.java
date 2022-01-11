@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.lt.bean.Course;
+import com.lt.bean.Notification;
 import com.lt.bean.Payment;
 import com.lt.exception.CourseNotFoundException;
 import com.lt.exception.PaymentFaildException;
@@ -28,6 +29,14 @@ public class StudentServiceImpl implements StudentService {
 	@Autowired
 	StudentRepository studentRepo;
 
+	/**
+	 * Method to removeCourse
+	 * 
+	 * @param studentId
+	 * @param courseId
+	 * @throws CourseNotFoundException
+	 * @return massage
+	 */
 	@Override
 	public String removeCourse(String removeCourseJson) throws CourseNotFoundException {
 		JSONObject jso = new JSONObject(removeCourseJson);
@@ -41,6 +50,13 @@ public class StudentServiceImpl implements StudentService {
 
 	}
 
+	/**
+	 * Method to viewGrades
+	 * 
+	 * @param studentId
+	 * @throws ViewGradeException
+	 * @return jsonObj
+	 */
 	public List<JSONObject> viewGrades(String studentId) throws ViewGradeException {
 		List<Course> courseList = studentRepo.viewGrades(studentId);
 		if (courseList.size() == 0)
@@ -58,8 +74,12 @@ public class StudentServiceImpl implements StudentService {
 
 	}
 
-	/*
-	 * Here we are the implement add course method
+	/**
+	 * Method to addCourses
+	 * 
+	 * @param studentId
+	 * @param courseId
+	 * @return studentCourseList
 	 */
 	public String addCourses(String course) {
 		// TODO Auto-generated method stub
@@ -78,7 +98,17 @@ public class StudentServiceImpl implements StudentService {
 
 	}
 
-	public String makePayment(String makePaymentJson) throws PaymentFaildException {
+	/**
+	 * Method to makePayment
+	 * 
+	 * @param studentId
+	 * @param cardNumber
+	 * @param paymentFee
+	 * @param cvvNumber
+	 * @param pin
+	 * @return payment
+	 */
+	public Notification makePayment(String makePaymentJson) throws PaymentFaildException {
 		Random r = new Random();
 		JSONObject jso = new JSONObject(makePaymentJson);
 		Payment payment = new Payment();
@@ -93,9 +123,16 @@ public class StudentServiceImpl implements StudentService {
 		int row = studentRepo.makePayment(payment);
 		if (row == 0)
 			throw new PaymentFaildException();
-		return "Payment of Rs " + payment.getPaymentFee() + " was successful";
+		return new Notification("Payment of Rs " + payment.getPaymentFee() + " was successful");
 	}
 
+	/**
+	 * Method to fetchPayment
+	 * 
+	 * @param studentId
+	 * @throws PaymentNotFoundException
+	 * @return payment
+	 */
 	public List<Payment> fetchPayment(String fetchPaymentJson) throws PaymentNotFoundException {
 		JSONObject paymentJson = new JSONObject(fetchPaymentJson);
 		String studentId = paymentJson.getString("studentId");

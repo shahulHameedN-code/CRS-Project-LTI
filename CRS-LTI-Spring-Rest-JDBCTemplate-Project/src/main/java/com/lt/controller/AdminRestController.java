@@ -29,6 +29,13 @@ public class AdminRestController {
 	@Autowired
 	AdminServiceImpl adminService;
 
+	/**
+	 * Method to removeCourse from Course Catalog
+	 * 
+	 * @param courseId
+	 * @throws CourseNotFoundException
+	 * @return msg
+	 */
 	@RequestMapping(path = "/removeCourse/{courseId}", method = RequestMethod.POST)
 	public ResponseEntity<String> removeCourse(@PathVariable("courseId") String courseId)
 			throws CourseNotFoundException {
@@ -36,6 +43,13 @@ public class AdminRestController {
 		return ResponseEntity.ok(result);
 	}
 
+	/**
+	 * This is generateReportCard method
+	 * 
+	 * @param studentId
+	 * @return null
+	 * @exception SQLException
+	 */
 	@RequestMapping(path = "/generateReportCard/{studentId}", method = RequestMethod.GET)
 	public ResponseEntity<String> generateReportCard(@PathVariable("studentId") String studentId)
 			throws StudentReportCardNotFoundException {
@@ -43,11 +57,28 @@ public class AdminRestController {
 		return ResponseEntity.ok(result.toString());
 	}
 
+	/**
+	 * Method to addCourse from Course Catalog
+	 * 
+	 * @param courseId
+	 * @param name
+	 * @param noOfStudents
+	 * @param paymentFee
+	 * @return courses
+	 */
 	@RequestMapping(value = "/addCourse", method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
 	public ResponseEntity<String> addCourse(@RequestBody String courseDetail) {
 		String result = adminService.addCourse(courseDetail);
 		return ResponseEntity.ok(result);
 	}
+
+	/**
+	 * Method to addprofessor
+	 * 
+	 * @param professorId
+	 * @param professorName
+	 * @return professor
+	 */
 
 	@RequestMapping(path = "/addProfessor", method = RequestMethod.POST)
 	public ResponseEntity<String> addprofessor(@RequestBody String addProfessorJson) {
@@ -56,4 +87,15 @@ public class AdminRestController {
 
 	}
 
+	/**
+	 * Method to approvedStudent
+	 * 
+	 * @param userId
+	 * @return userId
+	 */
+	@RequestMapping(value = "/approveStudent/{userId}", method = RequestMethod.GET, produces = "application/json")
+	public ResponseEntity<String> approvedStudent(@PathVariable String userId) {
+		String result = adminService.approvedStudent(userId);
+		return ResponseEntity.ok(result);
+	}
 }

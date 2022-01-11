@@ -16,7 +16,6 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 import com.lt.bean.Course;
-import com.lt.bean.Professor;
 import com.lt.constant.SQLConstant;
 
 /**
@@ -29,11 +28,24 @@ public class AdminRepository {
 	@Autowired
 	JdbcTemplate jdbcTemplate;
 
+	/**
+	 * This is removeCourse method
+	 * 
+	 * @param courseId
+	 * @return row
+	 */
 	public int removeCourse(String courseId) {
 
 		int row = jdbcTemplate.update(SQLConstant.DELETE_COURSE_ADMIN, courseId);
 		return row;
 	}
+
+	/**
+	 * This is removeCourse method
+	 * 
+	 * @param courseId
+	 * @return row
+	 */
 
 	public JSONObject generateReportCard(String studentId) {
 		String sql = "select * from studentcourse sc inner join course c on c.course_id=sc.course_id inner join student s on s.id=sc.student_id where sc.student_id=?";
@@ -68,6 +80,16 @@ public class AdminRepository {
 
 	}
 
+	/**
+	 * This is addCourse method
+	 * 
+	 * @param Id
+	 * @param name
+	 * @param noofstudent
+	 * @param PaymentFee
+	 * @return student
+	 */
+
 	public String addCourse(Course course) {
 		jdbcTemplate.update(SQLConstant.ADD_COURSE_DETAILS, course.getId(), course.getName(), course.getNoOfStudents(),
 				course.getPaymentFee());
@@ -76,12 +98,33 @@ public class AdminRepository {
 
 	}
 
-	public String addprofessor(Professor professor) {
+	/**
+	 * This is addprofessor method
+	 * 
+	 * @param Id
+	 * @param name
+	 * @param password
+	 * @return message
+	 */
+	public String addprofessor(String id, String name, String password) {
 		// TODO Auto-generated method stub
 
-		jdbcTemplate.update(SQLConstant.ADD_PROFESSOR, professor.getId(), professor.getName());
+		jdbcTemplate.update(SQLConstant.ADD_PROFESSOR, id, name);
+		jdbcTemplate.update(SQLConstant.REGISTER_USER, name, password, id, true);
 		return "Professor added Successfully";
 
 	}
 
+	/**
+	 * This is approvedStudent method
+	 * 
+	 * @param userId
+	 * @return message
+	 */
+	public String approvedStudent(String userId) {
+		jdbcTemplate.update(SQLConstant.APPROVED_STUDENT, userId);
+
+		return "Student approved successfully";
+
+	}
 }

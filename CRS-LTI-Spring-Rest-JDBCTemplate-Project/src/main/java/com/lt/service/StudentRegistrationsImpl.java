@@ -7,6 +7,7 @@ import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.lt.bean.Notification;
 import com.lt.bean.StudentRegistration;
 import com.lt.exception.PasswordMismatchException;
 import com.lt.repository.StudentRepository;
@@ -14,16 +15,25 @@ import com.lt.repository.StudentRepository;
 /**
  * @author Jeaswanth
  *
- * it is the implementation class of StudentRegistrations interface
+ *         it is the implementation class of StudentRegistrations interface
  */
 @Service
 public class StudentRegistrationsImpl implements StudentRegistrations {
 
 	@Autowired
 	StudentRepository studentRepo;
-
+	/**
+	 * Method to studentRegistration 
+	 * @param Id
+	 * @param address
+	 * @param emailId
+	 * @param password
+	 * @param confirmPassword
+	 * @throws PasswordMismatchException 
+	 * @return student
+	 */
 	@Override
-	public String studentRegistration(String registration) throws PasswordMismatchException {
+	public Notification studentRegistration(String registration) throws PasswordMismatchException {
 		JSONObject jsonObject = new JSONObject(registration);
 
 		StudentRegistration student = new StudentRegistration();
@@ -37,9 +47,10 @@ public class StudentRegistrationsImpl implements StudentRegistrations {
 		else
 			throw new PasswordMismatchException();
 
-			student.setName(jsonObject.getString("name"));
+		student.setName(jsonObject.getString("name"));
 
-		return studentRepo.registerStudent(student);
+		String message = studentRepo.registerStudent(student);
+		return new Notification(message);
 
 	}
 

@@ -25,6 +25,13 @@ public class CourseRepository {
 	@Autowired
 	JdbcTemplate jdbcTemplate;
 
+	/**
+	 * This is viewCourseList method
+	 * 
+	 * @param List<Course>
+	 * @return Course
+	 * @exception SQLException
+	 */
 	public List<Course> viewCourseList() {
 		return jdbcTemplate.query(SQLConstant.VIEW_LIST_COURSES, new RowMapper<Course>() {
 			@Override

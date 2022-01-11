@@ -19,13 +19,19 @@ import com.lt.rowmapper.LoginRowMapper;
 @Repository
 public class LoginRepository {
 
-
 	@Autowired
 	JdbcTemplate jdbcTemplate;
-	
+
+	/**
+	 * This is List<UserLogin>
+	 * 
+	 * @param userName
+	 * @param password
+	 * @return login
+	 */
 	public List<UserLogin> userLogin(String userName, String password) {
-		String sql =  "select * from user where username=? and password=?";
-		List<UserLogin> login =  jdbcTemplate.query(sql,new Object[] {userName,password},new LoginRowMapper());
+		String sql = "select * from user where username=? and password=? and isApproved=true";
+		List<UserLogin> login = jdbcTemplate.query(sql, new Object[] { userName, password }, new LoginRowMapper());
 		return login;
 	}
 }

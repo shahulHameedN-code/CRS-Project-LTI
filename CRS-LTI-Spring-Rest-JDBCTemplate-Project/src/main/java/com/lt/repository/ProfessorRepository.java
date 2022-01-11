@@ -24,7 +24,12 @@ public class ProfessorRepository {
 	@Autowired
 	JdbcTemplate jdbcTemplate;
 
-	/* here we are return the studentList */
+	/**
+	 * This is viewEnrolledStudents method
+	 * 
+	 * @param courseId
+	 * @return studentList
+	 */
 	public List<Student> viewEnrolledStudents(String courseId) {
 
 		List<Student> studentList = jdbcTemplate.query(SQLConstant.VIEW_ENROLLED_STUDENT, new Object[] { courseId },
@@ -32,10 +37,17 @@ public class ProfessorRepository {
 		return studentList;
 	}
 
-	/* here using addgrade method we are adding the grade */
+	/**
+	 * This is add grades method
+	 * 
+	 * @param courseId
+	 * @param studentId
+	 * @param grade
+	 * @return row
+	 */
 	public int addgrades(String studentId, String courseId, String grade) {
 
-		int row=jdbcTemplate.update(SQLConstant.ADD_GRADES, grade, studentId, courseId);
+		int row = jdbcTemplate.update(SQLConstant.ADD_GRADES, grade, studentId, courseId);
 		return row;
 	}
 

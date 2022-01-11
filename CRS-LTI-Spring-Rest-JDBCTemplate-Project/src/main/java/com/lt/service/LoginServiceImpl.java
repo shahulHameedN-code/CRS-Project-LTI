@@ -15,7 +15,13 @@ public class LoginServiceImpl {
 
 	@Autowired
 	LoginRepository loginRepo;
-
+	/**
+     * This is userLogin 
+     * @param userName
+     * @param password
+     * @exception InvalidCredentialsException
+     * @return 1
+     */
 	public int userLogin(String credentials) throws InvalidCredentialsException {
 		JSONObject jsonObj = new JSONObject(credentials);
 		String userName = jsonObj.getString("userName");

@@ -39,6 +39,12 @@ public class ProfesorRestController {
 	@Autowired
 	ProfessorServiceImpl professorService;
 
+	/**
+	 * This is viewEnrolledStudents method
+	 * 
+	 * @param courseId
+	 * @return studentList
+	 */
 	@RequestMapping(path = "/viewStudents/{courseId}", method = RequestMethod.GET, produces = "application/json")
 	public ResponseEntity<List<Student>> viewStudents(@PathVariable("courseId") String courseId)
 			throws CourseNotFoundException {
@@ -51,6 +57,14 @@ public class ProfesorRestController {
 		return ResponseEntity.ok().body(student);
 	}
 
+	/**
+	 * This is add grades method
+	 * 
+	 * @param courseId
+	 * @param studentId
+	 * @param grade
+	 * @return row
+	 */
 	@RequestMapping(path = "/addGrades", method = RequestMethod.POST, consumes = "application/json")
 	public ResponseEntity<String> addGrades(@RequestBody String addGradeJson) throws AddGradeException {
 		System.out.println("addGradJson " + addGradeJson);

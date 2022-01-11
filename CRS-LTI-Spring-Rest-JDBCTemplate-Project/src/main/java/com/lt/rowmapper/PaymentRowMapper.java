@@ -20,7 +20,8 @@ public class PaymentRowMapper implements RowMapper<Payment> {
 public Payment mapRow(ResultSet rs, int rowNum) throws SQLException {
 	Payment payment = new Payment();
 	payment.setPaymentId(rs.getString("paymentId"));
-	payment.setStudentId(rs.getString("studentId "));
+	payment.setStudentId(rs.getString("studentId"));
+	payment.setPaymentFee(rs.getInt("totalAmount"));
 	
 	return payment;
 	}
