@@ -1,0 +1,52 @@
+<style>
+  .container
+  {
+  position: absolute;
+  top: 200px;
+  left: 470px;
+  align-self: center;
+  border: 2px solid black;
+  padding: 50px;
+  border-radius: 15PX;
+  background-color: #f2f2f2;
+  }
+  .submit
+  {
+  left: 90px;
+  position: relative;
+  background-color: #cccccc;
+  border: 1px solid black;
+  border-radius: 5px;
+  height: 30px;
+  width: 80px;
+  top: 11px;
+  }
+  .loginTitle
+  {
+  text-align: center;
+  position: relative;
+  top: 72px;
+  font-size: 35px;
+  }
+  .loginPage
+  {
+  text-align: center;
+  position: relative;
+  top: 60px;
+  font-size: 25px;
+  }
+  </style>
+  
+
+
+
+  <h3 class="loginTitle">CRS LTI Application</h3>
+  <h3 class="loginPage">LOGIN</h3>
+  <form>
+  <div class="container" >
+  <label for="uname" ><b>Username : </b></label>
+  <input type="text" name="username" placeholder="Username" [(ngModel)]="username" required><br><br> <label for="psw"><b>Password : </b></label>
+  <input type="password" name="password" placeholder="Password" [(ngModel)]="password" required><br><br> 
+  <button type="submit" color="primary" (click)="login()">Login</button>
+  </div>
+  </form>

@@ -1,0 +1,37 @@
+<style>
+  .container
+  {
+    position: absolute;
+    top: 200px;
+    left: 450px;
+    align-self: center;
+    border: 2px solid black;
+    padding: 50px;
+    border-radius: 15PX;
+    width: 400px;
+    background-color: #f2f2f2;
+  }
+</style>
+
+<div class="container">
+  <div  class="container-fluid">  
+    <nav class="navbar navbar-expand-sm bg-dark navbar-dark">  
+        <ul class="navbar-nav">  
+          <li class="nav-item ">  
+            <a routerLink="addGrades" class="nav-link" class="btn btn-primary active" role="button" >Add Grades</a>  
+          </li>
+          <li class="nav-item">  
+            <a  routerLink="viewStudents" class="nav-link" class="btn btn-primary active" role="button" >View Students</a>  
+          </li>            
+        </ul>  
+      </nav>     
+        
+    </div>
+
+
+</div>
+
+<router-outlet></router-outlet>  
+
+
+    
